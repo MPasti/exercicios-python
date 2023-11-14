@@ -1,5 +1,7 @@
+import random
+
 def escolher_palavra():
-    with open("palavras.txt", "r") as arquivo:
+    with open("trabalho-2bimestre\palavras.txt", "r") as arquivo:
         palavras = arquivo.readlines()
     return random.choice(palavras).strip()
 
@@ -12,10 +14,10 @@ def exibir_palavra_oculta(palavra, letras_adivinhadas):
             palavra_oculta += "_"
     return palavra_oculta
 
-def jogar_forca(tentativas_fixas):
+def jogar_forca():
     palavra = escolher_palavra().upper()
     letras_adivinhadas = set()
-    tentativas_restantes = tentativas_fixas
+    tentativas_restantes = random.randint(6, 11)
 
     print("Bem-vindo ao Jogo da Forca!")
     print("Adivinhe a palavra:")
@@ -43,5 +45,5 @@ def jogar_forca(tentativas_fixas):
     if tentativas_restantes == 0:
         print(f"Fim de jogo. A palavra era: {palavra}")
 
-tentativas_fixas = 8  
-jogar_forca(tentativas_fixas)
+
+jogar_forca()
