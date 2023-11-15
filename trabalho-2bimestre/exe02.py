@@ -1,24 +1,51 @@
-def calcular_moda(vetor):
-    frequencias = {}
+
+# A MODA de um vetor de números é o número no vetor que é repetido com maior frequência.
+# Se mais de um número for repetido com frequência máxima igual, não existirá uma moda.
+# Escreva uma função que aceite um vetor de números e retorne a moda ou uma indicação de que
+# a moda não existe.
+
+import random
+
+def moda(vetor):
+    moda = []
+    vet1 = []
+    vet2 = []
+
+    for i in range(tamanho):
+        moda.append(0)
+        for j in range(tamanho):
+            if vetor[i] == vetor[j]:
+                moda[i] += 1
     
-    for numero in vetor:
-        if numero in frequencias:
-            frequencias[numero] += 1
+    frequencia = moda[0] 
+    valor = 0
+    for i in range(tamanho): 
+        if frequencia < moda[i]:
+            frequencia = moda[i]
+            valor = i 
+
+    for i in range(tamanho):
+        if moda[i] == frequencia:
+            vet1.append(vetor[i])
+        vet2 = vet1[::-1] 
+
+    for i in range(len(vet1)): 
+        if (vet1[i] != vet2[i]) or (i < len(vet1)-1 and vet1[i] != vet1[i+1]): 
+            return -1 
         else:
-            frequencias[numero] = 1
+            return vetor[valor]
     
-    frequencia_maxima = max(frequencias.values(), default=0)
+    
+vetor = []
+print('Exercicio 03! \nA MODA de um vetor')
+tamanho = (int(input("Entre o tamanho do vetor: ")))
+for i in range(tamanho):
+    vetor.append(int(input(f'Entre o {i+1}° valor: ')))
 
-    if frequencia_maxima == 1:
-        return "A moda não existe, todos os elementos são únicos."
-
-    modas = [numero for numero, frequencia in frequencias.items() if frequencia == frequencia_maxima]
-
-    if len(modas) == 1:
-        return f"A moda é: {modas[0]}"
-    else:
-        return "A moda não existe, há múltiplos números com a mesma frequência máxima."
-
-vetor_exemplo = [1, 2, 2, 3, 4, 4, 5]
-resultado = calcular_moda(vetor_exemplo)
-print(resultado)
+print(vetor,'\n')
+resultado = moda(vetor)
+if resultado == -1:
+    print("Não existe uma moda.\n")
+    
+else:
+    print(f"MODA = {resultado}\n")
